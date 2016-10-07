@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html>
+  <head>    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"> 
+    <title>COM554 Assignments Access Page</title> 
+
+
+    <!-- This web page should be located as in the example address below (only the student id number will be different)  -->
+    <!-- http://scm.ulst.ac.uk/~B00123456/COM554/access.html                               -->
+    <!-- The 4 buttons should link to specific files in the 2 subdirectories - see below:          -->
+    <!-- http://scm.ulst.ac.uk/~B00123456/workspace/COM554/assignment_1/jquery_demos.html            -->
+    <!-- http://scm.ulst.ac.uk/~B00123456/workspace/COM554/assignment_1/technical_log.pdf                      -->
+    <!-- http://scm.ulst.ac.uk/~B00123456/workspace/COM554/assignment_2/tv_guide.html                    -->
+    <!-- http://scm.ulst.ac.uk/~B00123456/workspace/COM554/assignment_2/evaluation_report.pdf        -->
+    <!-- http://scm.ulst.ac.uk/~B00123456/workspace/COM554/assignment_2/source_code.zip        -->
+
+    <!-- Note: the last 4 links are absolute links, provided for clarity                           -->
+    <!-- In the edited version of this file, the links should be specified in relative form, e.g.  -->
+    <!--          assignment_1/jquery_demos.html                                                   -->
+
+
+    <!-- Google is one of a number of Content Delivery Networks (CDN) that provide the jQuery library online -->
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="date_time.js"></script><style></style>
+    <style type="text/css">
+
+      body {background-color: rgb(248, 248, 255);}
+
+      #liveExample {
+        padding: 1em;
+        background-color: #EED;
+        border: 1px solid #CCC;
+        max-width: 400px;
+        margin: auto;
+        margin-top: 3em;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, .3);
+        -moz-box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, .3);
+        box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, .3);
+      }
+
+      * {
+        color: #000077;
+        font-family: arial;
+        text-decoration: none;
+        line-height: 1.6em;
+        margin: 0;
+      }
+
+      div {
+        display: block;
+      }
+
+      #browserInfo {
+        position: relative; 
+        top: 1em;
+        font-size: x-small;
+      }
+
+      .highlight {
+        font-weight: bold;
+      }
+
+    </style>
+
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#browserInfo').append("<p class='highlight'>Browser details detected at " + getClockTime() + "</p>");
+        $('#browserInfo').append("<span>Platform: "  + navigator.platform + " | </span>");
+        $('#browserInfo').append("<span>User-agent: "  + navigator.userAgent + " | </span>");
+        $('#browserInfo').append("<span>Protocol: "  + location.protocol + " | </span>");
+        if (location.port == ""){
+          $('#browserInfo').append("<span>Port: 80 (Default) | </span>");
+        }else {
+          $('#browserInfo').append("<span>Port: "  + location.port + " | </span>");
+        }
+        $('#browserInfo').append("<span>Hostname: "  + location.hostname + " | </span>");
+        $('#browserInfo').append("<span>Path: "  + location.pathname + " | </span>");
+        $('#browserInfo').append("<span>Session: "  + history.length + " | </span>");
+        $('#browserInfo').append("<span>Screen Height: "  + screen.height + " | </span>");
+        $('#browserInfo').append("<span>Screen Width: "  + screen.width + " | </span>");        
+        $('#browserInfo').append("<span>Browser Height: "  + window.outerHeight + " | </span>");
+        $('#browserInfo').append("<span>Browser Width: "  + window.outerWidth + " | </span>");
+        if (navigator.javaEnabled){
+          $('#browserInfo').append("<span>Java: enabled | </span>");
+        }
+        else{
+          $('#browserInfo').append("<span>Java: disabled | </span>");
+        }
+        if (navigator.cookieEnabled){
+          $('#browserInfo').append("<span>Cookies: enabled | </span>");
+        }
+        else{
+          $('#browserInfo').append("<span>Cookies: disabled | </span>");
+        }
+      });
+    </script>
+
+  </head>
+  <body style="zoom: 1;">
+    <div id="liveExample">
+      <div>
+        <h3>COM554 Assignments Access Page</h3>
+        <h2>Neil Rafferty</h2>
+        <h3 >B00451753</h3>
+      </div>
+
+      <!-- Links to university web sites and documents should be changed to point to assignment work -->
+
+      <form>
+        <fieldset>
+          <legend>Assignment 1</legend>
+          <a href="assignment_1/test.html" target="_blank"><button type="button">Live web site</button></a>
+          <a href="assignment_1/technical_log.pdf" target="_blank"><button type="button">technical_log.pdf</button></a>
+          <a href="assignment_1/dated.jpg" target="_blank"><button type="button">Screencast</button></a>
+        </fieldset>
+        <fieldset>
+          <legend>Assignment 2</legend>
+          <a href="http://www.ulster.ac.uk" target="_blank"><button type="button">Live web site</button></a>
+          <a href="http://www.ulster.ac.uk/information/location/Jordanstown Campus Map.pdf" target="_blank">
+            <button type="button">evaluation_report.pdf</button></a>
+            <a href="http://www.ulster.ac.uk" target="_blank"><button type="button">Screencast</button></a>
+        </fieldset>
+      </form>
+      <div>
+        <div id="browserInfo"></div> 
+      </div>            
+    </div> 
+
+  </body>
+</html>
+
