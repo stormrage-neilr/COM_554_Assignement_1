@@ -1,5 +1,40 @@
-html {
+body {
     background: black;
+    color: white;
+    font: Arial;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
 }
-h1 {color:red;}
+#navBar {
+    background:#111;
+}
+#nav-ul {
+    padding: .5%;
+    text-align: center;
+    color: #555;
+}
+.nav-li {
+    padding: .25%;
+    list-style: none;
+    text-align-last: left;
+    display:inline;
+    margin : 20px;
+}
+.nav-li:hover {
+    background: #555;
+    color: #111;
+}
+#nav-li-tv-series{
+    background:white;
+}
+#title_image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+h1 {
+    color:red;
+    text-align-last: center;
+}
 p {color:white;}
