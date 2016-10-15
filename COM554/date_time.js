@@ -1,3 +1,4 @@
+
   <!-- Copyright 2002 Bontrager Connection, LLC -->
   <!-- Web page explaing the following two functions is available from: -->
   <!--   http://www.web-source.net/web_development/javascript_date.htm  -->
