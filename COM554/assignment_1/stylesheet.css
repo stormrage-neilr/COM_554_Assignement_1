@@ -1,22 +1,20 @@
 body {
-    background: black;
-    color: #444;
+    background: #0D0D0D;
+    color: #BFBFBF;
     font-family: Arial;
     font-size: 15px;
     padding: 0;
     margin: 0;
 }
-#navBar {
-    background:#111;
-}
+
 #nav-ul {
     padding: 0;
     text-align: center;
     list-style-type: none;
-    color: #555;
     overflow: hidden;
 }
 .nav-li {
+    background: #262626;
     padding: 0%;
     list-style: none;
     display: inline-block;
@@ -27,14 +25,14 @@ body {
 
 .nav-li a {
     display: block;
-    color: white;
+    color: #BFBFBF;
     text-align: center;
     text-decoration: none;
     padding: 5px;
 }
 
 .nav-li:hover{
-    background: #555;
+    background: #4D4D4D;
     color: #111;
 }
 #title_image{
@@ -44,14 +42,31 @@ body {
     height: auto;
     width: 100%;
     max-width: 719px;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+}
+
+.italic{
+    font-size: small;
+    font-style: italic;
 }
 
 .hidden{
     display:none;
 }
 h1 {
-    color:red;
-    text-align-last: center;
+    text-align-last: left;
+    text-decoration: underline;
+}
+input {
+    width: 100%;
+    padding: 5px 3px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #register-content {
