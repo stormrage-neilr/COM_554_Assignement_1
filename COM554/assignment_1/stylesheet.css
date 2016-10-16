@@ -31,7 +31,7 @@ body {
     padding: 5px;
 }
 
-.nav-li:hover{
+.nav-li.hover {
     background: #4D4D4D;
     color: #111;
 }
