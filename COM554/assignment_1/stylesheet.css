@@ -1,8 +1,8 @@
 body {
     background: black;
-    color: white;
-    font: Arial;
-    font-size: 18px;
+    color: #444;
+    font-family: Arial;
+    font-size: 15px;
     padding: 0;
     margin: 0;
 }
@@ -10,28 +10,40 @@ body {
     background:#111;
 }
 #nav-ul {
-    padding: .5%;
+    padding: 0;
     text-align: center;
+    list-style-type: none;
     color: #555;
+    overflow: hidden;
 }
 .nav-li {
-    padding: .25%;
+    padding: 0%;
     list-style: none;
-    text-align-last: left;
-    display:inline;
-    margin : 20px;
+    display: inline-block;
+    margin : 0px;
+    width: 19%;
+    max-width: 144px;
 }
+
+.nav-li a {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 5px;
+}
+
 .nav-li:hover{
     background: #555;
     color: #111;
-}
-#nav-li-tv-series{
-    background:white;
 }
 #title_image{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: auto;
+    width: 100%;
+    max-width: 719px;
 }
 
 .hidden{
@@ -42,6 +54,9 @@ h1 {
     text-align-last: center;
 }
 
-p {color:white;}
-
+#register-content {
+    padding: 0 10px 0 10px;
+    max-width: 699px;
+    margin: auto;
+}
 
