@@ -1,38 +1,25 @@
 body {
     background: #0D0D0D;
-    color: black;
     font-family: Arial;
-    font-size: 15px;
-    padding: 0;
     margin: 0;
 }
 #nav-ul {
-    padding: 0;
     text-align: center;
-    list-style-type: none;
-    overflow: hidden;
+    padding: 0px;
 }
 .nav-li {
     background: #262626;
-    padding: 0%;
-    list-style: none;
     display: inline-block;
-    margin : 0px;
     width: 19%;
     max-width: 140px;
+    padding: 5px 0px;
+    margin: 0px;
 }
-
 .nav-li label {
-    display: block;
     color: #BFBFBF;
-    text-align: center;
-    text-decoration: none;
-    padding: 5px;
 }
-
-.nav-li.hover {
+.nav-li.highlight {
     background: #4D4D4D;
-    color: #111;
 }
 #title_image{
     display: block;
@@ -42,15 +29,8 @@ body {
     width: 100%;
     max-width: 719px;
     border-style: solid;
-    border-color: black;
     border-width: 2px;
 }
-
-.italic{
-    font-size: small;
-    font-style: italic;
-}
-
 .hidden{
     display:none;
 }
@@ -58,34 +38,27 @@ h1 {
     text-align-last: center;
     text-decoration: underline;
 }
-input {
+form input {
     font-size: 15px;
     width: 100%;
-    padding: 8px 0px;
-    margin: 8px 0px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
+    padding: 5px 0px;
+    margin: 5px 0px;
 }
 input[type=submit] {
     background-color: #4CAF50;
     color: white;
-    padding: 14px 0px;
-    margin: 8px 0;
+    padding: 10px 0px;
+    margin: 5px 0;
     cursor: pointer;
 }
-.bold{
-    font-weight: bold;
-}
 #register-content {
-    padding: 0 10px 0 10px;
+    padding: 0px 10px;
     max-width: 380px;
     margin: auto;
 }
 .wrapper{
     border-radius: 5px;
-    background: #73AD21;
-    padding: 1px 10px 1px 10px;
+    padding: 1px 10px;
     background-color: white;
 }
 
