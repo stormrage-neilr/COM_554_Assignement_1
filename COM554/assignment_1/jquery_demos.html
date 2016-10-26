@@ -8,27 +8,40 @@
     <script type="text/javascript" src="javascript.js"></script>
 </head>
 <body>
+<!--
+Title Image Element:
+Set in stylesheet.css to scale when the browser size gets below the image size.
+-->
 <img id='title_image' src="res/title_image.png">
-<div id="navBar">
+<!--
+Navagation Bar:
+Set in stylesheet.css to scale when the browser size gets below the maximum size, also
+has jQurey addClass() and removeClass() triggeing on a hover event.
+-->
+<nav id="navBar">
     <ul id="nav-ul">
-        <li class="nav-li"><a href="#TVSeries">TV Series</a></li>
-        <li class="nav-li"><a href="#Thing1">Thing 1</a></li>
-        <li class="nav-li"><a href="#Thing2">Thing 2</a></li>
-        <li class="nav-li"><a href="#Game">Game</a></li>
-        <li class="nav-li"><a href="#Register">Register</a></li>
+        <li class="nav-li"><label class="nav-label">Home</label></li>
+        <li class="nav-li"><label class="nav-label">Seasons</label></li>
+        <li class="nav-li"><label class="nav-label">Game</label></li>
+        <li class="nav-li"><label class="nav-label">Members</label></li>
+        <li class="nav-li"><label id='register-button' class="nav-label">Register</label></li>
     </ul>
-</div>
-
-<div id="register-content">
-    <h1>Register</h1>
-    <form>
-        <label>Firstname</label><input id='firstname' type="text"/><br>
-        <label>Surname</label><input id='surname' type="text"/><br>
-        <label>Email</label><input id='email' type="text"/><br>
-        <label>Please tick the checkbox to recieve information about upcoming events and the latest walking dead news.</label>
-        <input id="subscribe-checknox" type="checkbox"/>
-    </form>
-</div>
-
+</nav>
+<!--
+Registration Form:
+-->
+<section id="register-content" class="hidden">
+    <div class="wrapper">
+        <h1>Register</h1>
+        <form>
+            <label class="bold">Firstname</label><input id='firstname' type="text" required/><br>
+            <label class="bold">Surname</label><input id='surname' type="text" required/><br>
+            <label class="bold">Email</label><input id='email' type="email" placeholder="Enter a valid email address" required/><br>
+            <label>Please tick the checkbox to recieve information about upcoming events and the latest walking dead news.</label>
+            <input id="subscribe-checknox" type="checkbox"/>
+            <input type="submit">
+        </form>
+    </div>
+</section>
 </body>
 </html>

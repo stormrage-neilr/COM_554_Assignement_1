@@ -5,4 +5,8 @@ $(document).ready(function (){
     }, function () {
         $(this).removeClass("hover");
     });
+
+    $("#register-button").click(function () {
+        $("#register-content").removeClass('hidden');
+    });
 });
