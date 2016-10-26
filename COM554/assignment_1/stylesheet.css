@@ -18,7 +18,10 @@ body {
 .nav-li label {
     color: #BFBFBF;
 }
-.nav-li.highlight {
+.nav-li.selected {
+    background: #4D4D4D;
+}
+.nav-li:hover {
     background: #4D4D4D;
 }
 #title_image{

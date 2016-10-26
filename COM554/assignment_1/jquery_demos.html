@@ -8,35 +8,40 @@
     <script type="text/javascript" src="javascript.js"></script>
 </head>
 <body>
+
 <!--
 Title Image Element:
 Set in stylesheet.css to scale when the browser size gets below the image size.
 -->
 <img id='title_image' src="res/title_image.png">
+
 <!--
-Navagation Bar:
+Navigation Bar:
 Set in stylesheet.css to scale when the browser size gets below the maximum size, also
-has jQurey addClass() and removeClass() triggeing on a hover event.
+has jQuery addClass() and removeClass() triggering on a click event.
 -->
 <nav id="navBar">
     <ul id="nav-ul">
-        <li class="nav-li"><label class="nav-label">Home</label></li>
-        <li class="nav-li"><label class="nav-label">Seasons</label></li>
-        <li class="nav-li"><label class="nav-label">Game</label></li>
-        <li class="nav-li"><label class="nav-label">Members</label></li>
-        <li class="nav-li"><label id='register-button' class="nav-label">Register</label></li>
+        <li class="nav-li" id='home-button'><label class="nav-label">Home</label></li>
+        <li class="nav-li" id='seasons-button'><label class="nav-label">Seasons</label></li>
+        <li class="nav-li" id='game-button'><label class="nav-label">Game</label></li>
+        <li class="nav-li" id='members-button'><label class="nav-label">Members</label></li>
+        <li class="nav-li" id='register-button'><label class="nav-label">Register</label></li>
     </ul>
 </nav>
+
 <!--
-Registration Form:
+Registration Content:
+This form shows use of html5 functionality.
 -->
 <section id="register-content" class="hidden">
     <div class="wrapper">
         <h1>Register</h1>
         <form>
-            <label class="bold">Firstname</label><input id='firstname' type="text" required/><br>
-            <label class="bold">Surname</label><input id='surname' type="text" required/><br>
-            <label class="bold">Email</label><input id='email' type="email" placeholder="Enter a valid email address" required/><br>
+            <label class="bold">Firstname:</label><input id='firstname' type="text" required/><br>
+            <label class="bold">Surname:</label><input id='surname' type="text" required/><br>
+            <label class="bold">Email:</label><input id='email' type="email" placeholder="Enter a valid email address" required/><br>
+            <label class="bold">Email:</label><input id='email' type="date" placeholder="Enter a valid email address" required/><br>
             <label>Please tick the checkbox to recieve information about upcoming events and the latest walking dead news.</label>
             <input id="subscribe-checknox" type="checkbox"/>
             <input type="submit">
