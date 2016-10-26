@@ -5,7 +5,7 @@ body {
 }
 #nav-ul {
     text-align: center;
-    padding: 0px;
+    padding: 0px 10px;
 }
 .nav-li {
     background: #262626;
@@ -34,7 +34,7 @@ body {
     border-style: solid;
     border-width: 2px;
 }
-.hidden{
+.hidden {
     display:none;
 }
 h1 {
@@ -54,14 +54,19 @@ input[type=submit] {
     margin: 5px 0;
     cursor: pointer;
 }
+.content {
+    padding: 0px 10px;
+    width: 95%;
+    max-width: 717px;
+    margin: auto;
+}
+.wrapper {
+    border-radius: 5px;
+    padding: 1px 10px;
+    background-color: white;
+}
 #register-content {
     padding: 0px 10px;
     max-width: 380px;
     margin: auto;
 }
-.wrapper{
-    border-radius: 5px;
-    padding: 1px 10px;
-    background-color: white;
-}
-

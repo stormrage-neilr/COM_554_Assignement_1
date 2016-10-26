@@ -31,6 +31,55 @@ has jQuery addClass() and removeClass() triggering on a click event.
 </nav>
 
 <!--
+Home Content:
+-->
+<section id="home-content" class="hidden" class="content">
+    <div class="wrapper">
+        <p>this is a Home paragraph</p>
+    </div>
+</section>
+
+<!--
+Seasons Content:
+-->
+<section id="seasons-content" class="hidden">
+    <div class="wrapper">
+        <p>this is a Seasons paragraph</p>
+    </div>
+</section>
+
+<!--
+Game Content:
+-->
+<section id="game-content" class="hidden">
+    <div class="wrapper">
+        <p>this is a Game paragraph</p>
+    </div>
+</section>
+
+<!--
+Members Content:
+-->
+<section id="members-content" class="hidden">
+    <div class="wrapper">
+        <article>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
+        </article>
+    </div>
+</section>
+
+<!--
 Registration Content:
 This form shows use of html5 functionality.
 -->
@@ -41,7 +90,7 @@ This form shows use of html5 functionality.
             <label class="bold">Firstname:</label><input id='firstname' type="text" required/><br>
             <label class="bold">Surname:</label><input id='surname' type="text" required/><br>
             <label class="bold">Email:</label><input id='email' type="email" placeholder="Enter a valid email address" required/><br>
-            <label class="bold">Email:</label><input id='email' type="date" placeholder="Enter a valid email address" required/><br>
+            <label class="bold">Date Of Birth:</label><input id='dob-input' type="date" required/><br>
             <label>Please tick the checkbox to recieve information about upcoming events and the latest walking dead news.</label>
             <input id="subscribe-checknox" type="checkbox"/>
             <input type="submit">
