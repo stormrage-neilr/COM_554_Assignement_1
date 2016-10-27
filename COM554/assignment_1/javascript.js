@@ -58,6 +58,8 @@ $(document).ready(function (){
     });
 
     //Adding the new registered member into the members list
+    $("#submit-button").click(function() {
 
+    });
 
 });
