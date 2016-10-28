@@ -7,7 +7,7 @@ $(document).ready(function (){
         //Highlighting correct navigation bar button on click
         $(".nav-li").removeClass("selected");
         $(this).addClass("selected");
-        //Hide all sections and show the corresponding section section
+        //Hide all sections and show the corresponding section
         $("section").addClass('hidden');
         $("#home-content").removeClass('hidden');
         //Adding css to the section
