@@ -54,6 +54,10 @@ input[type=submit] {
     margin: 5px 0;
     cursor: pointer;
 }
+input[type=checkbox] {
+    width: 12px;
+    margin: 0px;
+}
 .content {
     padding: 0px 10px;
     width: 95%;

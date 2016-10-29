@@ -64,7 +64,7 @@ Members Content:
     <div class="wrapper">
         <article>
             <table>
-                <tr>
+                <tr id="member-table-header-row">
                     <th>Name</th>
                     <th>Age</th>
                     <th>Email</th>
@@ -82,13 +82,13 @@ This form shows use of html5 functionality.
 <section id="register-content" class="hidden">
     <div class="wrapper">
         <h1>Register</h1>
-        <form>
+        <form id="registration-form">
             <label class="bold">Firstname:</label><input id='firstname' type="text" required/><br>
             <label class="bold">Surname:</label><input id='surname' type="text" required/><br>
             <label class="bold">Email:</label><input id='email' type="email" placeholder="Enter a valid email address" required/><br>
             <label class="bold">Date Of Birth:</label><input id='dob-input' type="date" required/><br>
-            <label>Please tick the checkbox to recieve information about upcoming events and the latest walking dead news.</label>
-            <input id="subscribe-checknox" type="checkbox"/>
+            <label for="subscribe-checkbox">Please tick the checkbox to recieve information about upcoming events and the latest walking dead news.</label>
+            <input id="subscribe-checkbox" type="checkbox"/>
             <input type="submit" id="submit-button">
         </form>
     </div>

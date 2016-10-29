@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE Member [
+        <!ELEMENT Member (Name, DOB, Email_Address, Subscriber)>
+            <!ELEMENT Name (Firstname, Surname)>
+                <!ELEMENT Firstname (#PCDATA)>
+                <!ELEMENT Surname (#PCDATA)>
+            <!ELEMENT DOB (#PCDATA)>
+            <!ELEMENT Email_Address (#PCDATA)>
+            <!ELEMENT Subscriber (#PCDATA)>
+        ]>
+<Member>
+    <Name>
+        <Firstname>Neil</Firstname>
+        <Surname>Rafferty</Surname>
+    </Name>
+    <DOB>1988-04-19</DOB>
+    <Email_Address>Rafferty-n@email.ulster.ac.uk</Email_Address>
+    <Subscriber>on</Subscriber>
+</Member>
