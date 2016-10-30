@@ -41,55 +41,18 @@ $(document).ready(function (){
         $("#register-content").removeClass('hidden');
     });
 
-    // *** Registration section Functionality ***
-
-    //Setting the latest date of birth in the registration form to today
-    $("#dob-input").attr("max", function(){
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1;
-        if(dd < 10){
-            dd = '0' + dd
-        }
-        if(mm < 10){
-            mm = '0' + mm
-        }
-        return today.getFullYear()+'-'+mm+'-'+dd;
-    });
-
-    //Adding the new registered member into the members list
-    $("#registration-form").submit(function(e) {
-        var birthDay = $('#dob-input').val().substring(8, 10);
-        var birthMonth = $('#dob-input').val().substring(5, 7);
-        var birthYear = $('#dob-input').val().substring(0, 4);
-
-        var today = new Date().getDate();
-        var thisMonth = new Date().getMonth() + 1;
-        var thisYear = new Date().getFullYear();
-
-        var age = thisYear - birthYear;
-        if ((birthMonth > thisMonth) || (birthMonth == thisMonth && birthDay > today)) {
-            age -= 1;
-        }
-
-        $("#member-table-header-row").after("<tr>" +
-            "<td>" + $('#firstname').val() + " " + $('#surname').val() + "</td>" +
-            "<td>" + age + "</td>" +
-            "<td>" + $('#email').val() + "</td>" +
-            "<td>" + $('#subscribe-checkbox').val() + "</td></tr>");
-
-        $(".nav-li").removeClass("selected");
-        $(this).addClass("selected");
-        $("section").addClass('hidden');
-        $("#members-content").removeClass('hidden');
-        $("#members-content").addClass('content');
-    });
+    // *** Members Table Functionality ***
 
     //Populating the members table from the xml file
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "members.xml", false)//synchronous local get request
-    xhr.send();
-    var members = xhr.responseXML.getElementsByTagName("Member");
+    if (document.cookie == "") {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "members.xml", false)//synchronous local get request
+        xhr.send();
+        xmlDoc = xhr.responseXML;
+    }else{
+        xmlDoc = $.parseXML(document.cookie);
+    }
+    var members = xmlDoc.getElementsByTagName("Member");
 
     var today = new Date().getDate();
     var thisMonth = new Date().getMonth() + 1;
@@ -108,7 +71,7 @@ $(document).ready(function (){
         }
 
         var isSubscriber;
-        if(members[i].getElementsByTagName("Subscriber") === "on"){
+        if(members[i].getElementsByTagName("Subscriber")[0].childNodes[0].nodeValue === "true"){
             isSubscriber = "Yes";
         }else{
             isSubscriber = "No";
@@ -122,4 +85,47 @@ $(document).ready(function (){
             "<td>" + isSubscriber + "</td></tr>");
     }
 
+    // *** Registration section Functionality ***
+
+    //Setting the latest date of birth in the registration form to today
+    $("#dob-input").attr("max", function(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1;
+        if(dd < 10){
+            dd = '0' + dd
+        }
+        if(mm < 10){
+            mm = '0' + mm
+        }
+        return today.getFullYear()+'-'+mm+'-'+dd;
+    });
+
+    //Storing an updated version of the xml as a string in a cookie
+    $("#registration-form").submit(function() {
+
+        var member = xmlDoc.createElement("Member");
+        var name = xmlDoc.createElement("Name");
+        var firstname = xmlDoc.createElement("Firstname");
+        var surname = xmlDoc.createElement("Surname");
+        var dob = xmlDoc.createElement("DOB");
+        var email = xmlDoc.createElement("Email_Address");
+        var subscriber = xmlDoc.createElement("Subscriber");
+
+        firstname.append($('#firstname').val());
+        surname.append($('#surname').val());
+        dob.append($('#dob-input').val());
+        email.append($('#email').val());
+        subscriber.append($('#subscribe-checkbox').is(':checked'));
+
+        name.appendChild(firstname);
+        name.appendChild(surname);
+        member.appendChild(name);
+        member.appendChild(dob);
+        member.appendChild(email);
+        member.appendChild(subscriber);
+        xmlDoc.getElementsByTagName("Members")[0].appendChild(member);
+
+        document.cookie = new XMLSerializer().serializeToString(xmlDoc).replace(/[\r\n]/g, '');
+    });
 });
