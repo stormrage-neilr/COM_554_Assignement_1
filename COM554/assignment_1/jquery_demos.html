@@ -23,17 +23,27 @@ has jQuery addClass() and removeClass() triggering on a click event.
 <nav id="navBar">
     <ul id="nav-ul">
         <li class="nav-li" id='home-button'><label class="nav-label">Home</label></li>
-        <li class="nav-li" id='seasons-button'><label class="nav-label">Seasons</label></li>
+        <li class="nav-li" id='seasons-button'><label class="nav-label">Seasons</label>
+            <ul id="dropdown-menu">
+            <li class="nav-li" id="dropdown-season1"><label class="nav-label">Season 1</label></li>
+            <li class="nav-li" id="dropdown-season2"><label class="nav-label">Season 2</label></li>
+            <li class="nav-li" id="dropdown-season3"><label class="nav-label">Season 3</label></li>
+            <li class="nav-li" id="dropdown-season4"><label class="nav-label">Season 4</label></li>
+            <li class="nav-li" id="dropdown-season5"><label class="nav-label">Season 5</label></li>
+            <li class="nav-li" id="dropdown-season6"><label class="nav-label">Season 6</label></li>
+            <li class="nav-li" id="dropdown-season7"><label class="nav-label">Season 7</label></li>
+        </ul></li>
         <li class="nav-li" id='game-button'><label class="nav-label">Game</label></li>
         <li class="nav-li" id='members-button'><label class="nav-label">Members</label></li>
         <li class="nav-li" id='register-button'><label class="nav-label">Register</label></li>
     </ul>
+
 </nav>
 
 <!--
 Home Content:
 -->
-<section id="home-content" class="hidden" class="content">
+<section id="home-content" class="content">
     <div class="wrapper">
         <p>this is a Home paragraph</p>
     </div>
@@ -42,7 +52,7 @@ Home Content:
 <!--
 Seasons Content:
 -->
-<section id="seasons-content" class="hidden">
+<section id="seasons-content" class="content">
     <div id="seasons-wrapper" class="wrapper">
         <div class="seasons-container">
         </div>
@@ -52,7 +62,7 @@ Seasons Content:
 <!--
 Game Content:
 -->
-<section id="game-content" class="hidden">
+<section id="game-content" class="content">
     <div class="wrapper">
         <p>this is a Game paragraph</p>
     </div>
@@ -61,7 +71,7 @@ Game Content:
 <!--
 Members Content:
 -->
-<section id="members-content" class="hidden">
+<section id="members-content" class="content">
     <div class="wrapper">
         <article>
             <h1>Members</h1>
@@ -81,7 +91,7 @@ Members Content:
 Registration Content:
 This form shows use of html5 functionality.
 -->
-<section id="register-content" class="hidden">
+<section id="register-content" class="content">
     <div class="wrapper">
         <h1>Register</h1>
         <form id="registration-form">

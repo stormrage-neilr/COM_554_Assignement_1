@@ -27,18 +27,30 @@ body {
     padding: 5px 0px;
     margin: 0px;
 }
+#dropdown-menu{
+    position: absolute;
+    margin: 5px 0px;
+    padding: 0px;
+    text-align: center;
+    width:100%;
+    display: none;
+}
+#dropdown-menu li{
+    background: #262626;
+    display: block;
+    padding: 5px;
+    margin: 5px 0px;
+    text-align: center;
+    width: 100%;
+}
 .nav-li label {
     color: #BFBFBF;
 }
 .nav-li.selected {
     background: #4D4D4D;
 }
-.nav-li:hover {
+.nav-li:hover, #dropdown-menu li:hover{
     background: #4D4D4D;
-}
-
-.hidden {
-    display:none;
 }
 .content {
     padding: 0px 10px;
@@ -100,10 +112,13 @@ table {
 tr:nth-child(odd) {
     background-color: #b8b8b8;
 }
+#seasons-wrapper{
+    min-height: 633px;
+}
 .episode-img{
     margin-bottom: 20px;
-    border-style: groove;
-    border-color: #4D4D4D;
+    border-style: solid;
+    border-color: #bdbdbd;
     float:right;
 }
 

@@ -2,43 +2,72 @@ $(document).ready(function (){
 
     // *** Navigation bar section Functionality ***
 
+    //Hide all sections and then select home.
+    $("section").hide();
+    $("#home-button").addClass("selected");
+    $("#home-content").show();
+
     //Navigation button events - hide and show content.
     $("#home-button").click(function () {
         //Highlighting correct navigation bar button on click
         $(".nav-li").removeClass("selected");
         $(this).addClass("selected");
         //Hide all sections and show the corresponding section
-        $("section").addClass('hidden');
-        $("#home-content").removeClass('hidden');
+        $("section").hide();
+        $("#home-content").show();
         //Adding css to the section
         $("#home-content").addClass('content');
     });
     $("#seasons-button").click(function () {
         $(".nav-li").removeClass("selected");
         $(this).addClass("selected");
-        $("section").addClass('hidden');
-        $("#seasons-content").removeClass('hidden');
+        $("section").hide();
+        $("#seasons-content").show();
         $("#seasons-content").addClass('content');
+        //Demonstrating fade capabilities below
+        $(".season-container").hide().fadeIn('slow');
     });
     $("#game-button").click(function () {
         $(".nav-li").removeClass("selected");
         $(this).addClass("selected");
-        $("section").addClass('hidden');
-        $("#game-content").removeClass('hidden');
+        $("section").hide();
+        $("#game-content").show();
         $("#game-content").addClass('content');
     });
     $("#members-button").click(function () {
         $(".nav-li").removeClass("selected");
         $(this).addClass("selected");
-        $("section").addClass('hidden');
-        $("#members-content").removeClass('hidden');
+        $("section").hide();
+        $("#members-content").show();
         $("#members-content").addClass('content');
     });
     $("#register-button").click(function () {
         $(".nav-li").removeClass("selected");
         $(this).addClass("selected");
-        $("section").addClass('hidden');
-        $("#register-content").removeClass('hidden');
+        $("section").hide();
+        $("#register-content").show();
+    });
+
+    //Toggling the seasons dropdown menu
+    $("#seasons-button").hover(function(){
+        $("#dropdown-menu").slideDown();
+    }, function() {
+        $("#dropdown-menu").slideUp();
+    });
+    $("#dropdown-menu").hover(function(e){
+        e.stopPropagation()
+    }, function(e) {
+    });
+    $("#dropdown-menu").find('li').click(function(e){
+        e.stopPropagation();
+        var seasonNumber = $(this)[0].innerText.substring(7, 8);
+        $("section").hide();
+        $("#seasons-content").show();
+        $("#season-container" + seasonNumber).find('.episodes-container').slideDown();
+        $("#dropdown-menu").slideUp();
+        $('html, body').animate({
+            scrollTop: ($('#season-container' + seasonNumber).offset().top)
+        },'fast');
     });
 
     // *** Seasons Functionality ***
@@ -52,7 +81,7 @@ $(document).ready(function (){
     //Populating the seasons content
     for (var i = 0; i < seasons.length - 1; i++) {
         var seasonNo = seasons[i].getElementsByTagName("Season_Number")[0].innerHTML;
-        var htmlString = "<div class=\"season-container\"><h2>Season " + seasonNo + "</h2><div class=\"episodes-container\">";
+        var htmlString = "<div class=\"season-container\" id=\"season-container" + seasonNo +"\"><h2>Season " + seasonNo + "</h2><div class=\"episodes-container\">";
         var episodes = seasons[i].getElementsByTagName("Episode");
         for (var j = 0; j < episodes.length; j++) {
             var description = episodes[j].getElementsByTagName("Description")[0].innerHTML;
@@ -68,35 +97,26 @@ $(document).ready(function (){
         $('#seasons-wrapper').prepend(htmlString);
     }
 
-    // <div class="season-container">
-    //     <h2>Season *Season Number*</h2>
-    //     <div class="episodes-container">
-    //         <div class="episode-container">
-    //             <h3>Episode *Episode Number*</h3>
-    //             <div class="episode-contents-container">
-    //                 <h4>*Title*</h4>
-    //                 <img class="episode-img" src="*Image_Source*"/>
-    //                 <div class="description-container">
-    //                     <p></p>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>
-    // </div>
-
-    //Sliding up list of episodes and episode contents
+    //Sliding up list of episodes and episode contents.
     $('.episode-contents-container').slideUp();
     $('.episodes-container').slideUp();
+
+    //Adding episode list slide toggle click event onto the parent season container.
     $('.season-container').click(function(){
         $(this).find('.episodes-container').slideToggle()
 
     });
+
+    //Stoping the slide being toggled from within the episode list container.
     $('.episodes-container').click(function(e){
         e.stopPropagation()
     });
+
+    //Adding episode content slide toggle click event onto the parent episode container.
     $('.episode-container').click(function(e){
         $(this).find('.episode-contents-container').slideToggle()
     });
+
 
 
 
