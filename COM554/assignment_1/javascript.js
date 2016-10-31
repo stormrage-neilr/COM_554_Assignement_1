@@ -68,6 +68,11 @@ $(document).ready(function (){
         $("section").hide();
         $("#members-content").show();
         $("#members-content").addClass('content');
+        removeCurrentContent();
+        setMembersXMLDoc();
+        populateSelectElement();
+        populateTable();
+        populateList();
     });
     $("#register-button").click(function () {
         $(".nav-li").removeClass("selected");
@@ -156,10 +161,11 @@ $(document).ready(function (){
     xhr.send();
     seasons = xhr.responseXML.getElementsByTagName('Season');//returning xhr request as an xml document.
 
-    //Populating the seasons content
+    //Populating the seasons content.
     for (var i = 0; i < seasons.length - 1; i++) {
         var seasonNo = seasons[i].getElementsByTagName("Season_Number")[0].innerHTML;
-        var htmlString = "<div class=\"season-container\" id=\"season-container" + seasonNo +"\"><h2>Season " + seasonNo + "</h2><div class=\"episodes-container\">";
+        var htmlString = "<div class=\"season-container\" id=\"season-container" + seasonNo +"\"><h2>Season " + seasonNo
+            + "</h2><div class=\"episodes-container\">";
         var episodes = seasons[i].getElementsByTagName("Episode");
         for (var j = 0; j < episodes.length; j++) {
             var k = episodes.length -1 - j;
@@ -167,7 +173,8 @@ $(document).ready(function (){
             if (description === ""){
                 description = "No content description available... I'm Sorry";
             }
-            htmlString += "<div class=\"episode-container\"><h3>Episode " + (j + 1) + "</h3><div class=\"episode-contents-container\">" +
+            htmlString += "<div class=\"episode-container\"><h3>Episode " + (j + 1) +
+                "</h3><div class=\"episode-contents-container\">" +
             "<h4>" + episodes[k].getElementsByTagName("Title")[0].innerHTML + "</h4>" +
             "<img class=\"episode-img\" src=\"" + episodes[k].getElementsByTagName("Image_Source")[0].innerHTML  + "\"/>" +
             "<div class=\"description-container\"><p>" + description  + "</p></div></div></div>";
@@ -196,12 +203,7 @@ $(document).ready(function (){
         $(this).find('.episode-contents-container').toggle("slide")
     });
 
-
-
-
-
-
-    /* *** Members Table Functionality ***
+    /* *** Members Functionality ***
 
     An initial list of members is being loaded from an xml file in the project.
     However, if the registration form is submitted by the user an updated version of
@@ -237,32 +239,70 @@ $(document).ready(function (){
         return age;
     }
 
+    //This method removes the current list table and select elements so they do not cumulate.
+    function removeCurrentContent(){
+        $("table").remove();
+        $("#delete-button-list").remove();
+        $("#select-member").remove()
+    }
+
     //Populating the members table.
-    setMembersXMLDoc();
-    var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
-    for(var i = 0; i< members.length; i++){
-        //Selecting the needed information from each member instance.
-        var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
-        var surname = members[i].getElementsByTagName("Surname")[0].childNodes[0].nodeValue;
-        var dob = members[i].getElementsByTagName("DOB")[0].childNodes[0].nodeValue;
-        var email = members[i].getElementsByTagName("Email_Address")[0].childNodes[0].nodeValue;
-        var isSub = members[i].getElementsByTagName("Subscriber")[0].childNodes[0].nodeValue;
+    function populateTable() {
+        var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
+        var html = "<table id='table'><tr id=\"member-table-header-row\"><th>Name</th><th>Age</th><th>Email</th>" +
+        "<th>On Mailing List</th></tr>"
+        for (var i = 0; i < members.length; i++) {
+            //Selecting the needed information from each member instance.
+            var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
+            var surname = members[i].getElementsByTagName("Surname")[0].childNodes[0].nodeValue;
+            var dob = members[i].getElementsByTagName("DOB")[0].childNodes[0].nodeValue;
+            var email = members[i].getElementsByTagName("Email_Address")[0].childNodes[0].nodeValue;
+            var isSub = members[i].getElementsByTagName("Subscriber")[0].childNodes[0].nodeValue;
 
-        var name = firstname + " " + surname;
-        var age = getAge(dob);//Calculating members age.
-        var subText;
-        if(isSub === "true"){
-            subText = "Yes";
-        }else{
-            subText = "No";
+            var name = firstname + " " + surname;
+            var age = getAge(dob);//Calculating members age.
+            var subText;
+            if (isSub === "true") {
+                subText = "Yes";
+            } else {
+                subText = "No";
+            }
+
+            //Inserting table row element directly into the dom with current information.
+            html +="<tr><td>" + name + "</td><td>" + age + "</td>" +
+                "<td>" + email + "</td><td>" + subText + "</td></tr>";
         }
+        html += "</table>"
+        $('#table-container').append(html);
+    }
 
-        //Inserting table row element directly into the dom with current information.
-        $("#member-table-header-row").after(
-            "<tr><td>" + name + "</td>" +
-            "<td>" + age + "</td>" +
-            "<td>" + email + "</td>" +
-            "<td>" + subText + "</td></tr>");
+    //Populating the delete button list.
+    function populateList(){
+        var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
+        var html = "<ul id='delete-button-list'>";
+        for (var i = 0; i < members.length; i++) {
+            //Selecting the needed information from each member instance.
+            var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
+            //Inserting delete button list item into the list with the firstname of the member.
+            html +="<li class='delete-button'>Delete: " + firstname + "</li>";
+        }
+        html += "</ul>"
+        $('#list-container').append(html);
+    }
+
+    //Populating the select element.
+    function populateSelectElement(){
+        var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
+        var html = "<select id='select-member'><optgroup label='Members'>" +
+            "<option class='delete-button' value=-1>None</option>";
+        for (var i = 0; i < members.length; i++) {
+            //Selecting the needed information from each member instance.
+            var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
+            //Inserting delete button list item into the list with the firstname of the member.
+            html +="<option class='delete-button' value=" + i + ">" + firstname + "</option>";
+        }
+        html += "</optgroup></select>"
+        $('#select-container').append(html);
     }
 
     // *** Registration section Functionality ***
