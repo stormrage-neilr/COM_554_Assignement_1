@@ -3,8 +3,27 @@ $(document).ready(function (){
     // *** Title Image ***
 
     //Adding a tooltip to display assignment details when the mouse hovers over the title image.
-    $("#title_image").hover(function(e){
-        ("")
+    $("#title_image").mouseover(function(e){
+        $("body").append("<p id='tooltip'>Neil Rafferty (B00451753) - COM554: Assignment 1</p>");
+        var totalWidth = $(this).width();
+        if(e.pageX/totalWidth > .5){
+            $("#tooltip").css("left", (e.pageX - 370) + "px");
+        }else{
+            $("#tooltip").css("left", (e.pageX) + "px")
+        }
+        $("#tooltip").css("top", (e.pageY) + "px")
+    });
+    $("#title_image").mouseleave(function(e){
+        $("#tooltip").remove();
+    });
+    $('body').mousemove(function(e){
+        var totalWidth = $(this).width();
+        if(e.pageX/totalWidth > .5){
+            $("#tooltip").css("left", (e.pageX - 370) + "px");
+        }else{
+            $("#tooltip").css("left", (e.pageX) + "px")
+        }
+        $("#tooltip").css("top", (e.pageY) + "px")
     });
 
     // *** Navigation bar section Functionality ***
@@ -155,7 +174,7 @@ $(document).ready(function (){
 
     //Adding episode content slide toggle click event onto the parent episode container.
     $('.episode-container').click(function(e){
-        $(this).find('.episode-contents-container').slideToggle()
+        $(this).find('.episode-contents-container').slideToggle(200)
     });
 
 
