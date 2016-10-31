@@ -41,25 +41,85 @@ $(document).ready(function (){
         $("#register-content").removeClass('hidden');
     });
 
+    // *** Seasons Functionality ***
+
+    //Retrieving season information from local xml file
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "res/Seasons.xml", false)//synchronous local get request.
+    xhr.send();
+    seasons = xhr.responseXML.getElementsByTagName('Season');//returning xhr request as an xml document.
+
+    //Populating the seasons content
+    for (var i = 0; i < seasons.length - 1; i++) {
+        var seasonNo = seasons[i].getElementsByTagName("Season_Number")[0].innerHTML;
+        var htmlString = "<div class=\"season-container\"><h2>Season " + seasonNo + "</h2><div class=\"episodes-container\">";
+        var episodes = seasons[i].getElementsByTagName("Episode");
+        for (var j = 0; j < episodes.length; j++) {
+            var description = episodes[j].getElementsByTagName("Description")[0].innerHTML;
+            if (description === ""){
+                description = "No content description available... I'm Sorry";
+            }
+            htmlString += "<div class=\"episode-container\"><h3>Episode " + (j + 1) + "</h3><div class=\"episode-contents-container\">" +
+            "<h4>" + episodes[j].getElementsByTagName("Title")[0].innerHTML + "</h4>" +
+            "<img class=\"episode-img\" src=\"" + episodes[j].getElementsByTagName("Image_Source")[0].innerHTML  + "\"/>" +
+            "<div class=\"description-container\"><p>" + description  + "</p></div></div></div>";
+        }
+        htmlString += "</div></div>";
+        $('#seasons-wrapper').prepend(htmlString);
+    }
+
+    // <div class="season-container">
+    //     <h2>Season *Season Number*</h2>
+    //     <div class="episodes-container">
+    //         <div class="episode-container">
+    //             <h3>Episode *Episode Number*</h3>
+    //             <div class="episode-contents-container">
+    //                 <h4>*Title*</h4>
+    //                 <img class="episode-img" src="*Image_Source*"/>
+    //                 <div class="description-container">
+    //                     <p></p>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+    // </div>
+
+    //Sliding up list of episodes and episode contents
+    $('.episode-contents-container').slideUp();
+    $('.episodes-container').slideUp();
+    $('.season-container').click(function(){
+        $(this).find('.episodes-container').slideToggle()
+
+    });
+    $('.episodes-container').click(function(e){
+        e.stopPropagation()
+    });
+    $('.episode-container').click(function(e){
+        $(this).find('.episode-contents-container').slideToggle()
+    });
+
+
+
+
     /* *** Members Table Functionality ***
 
     An initial list of members is being loaded from an xml file in the project.
     However, if the registration form is submitted by the user an updated version of
     this xml file will be stored in a cookie. The xml file itself should be update in
     a future release.*/
-    
+
     //Retrieving an xml document from the users cookie or the xml file.
-    function setXMLDoc() {
+    function setMembersXMLDoc() {
         if (document.cookie == "") {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "members.xml", false)//synchronous local get request.
+            xhr.open("GET", "res/members.xml", false)//synchronous local get request.
             xhr.send();
-            xmlDoc = xhr.responseXML;//returning xhr request as an xml document.
+            membersXMLDoc = xhr.responseXML;//returning xhr request as an xml document.
         }else{
-            xmlDoc = $.parseXML(document.cookie);//returning document cookie string parsed into xml.
+            membersXMLDoc = $.parseXML(document.cookie);//returning document cookie string parsed into xml.
         }
     }
-    
+
     //This method returns an age given a date.
     function getAge(dob){
         var today = new Date().getDate();
@@ -76,10 +136,10 @@ $(document).ready(function (){
         }
         return age;
     }
-    
+
     //Populating the members table.
-    setXMLDoc();
-    var members = xmlDoc.getElementsByTagName("Member");//Retrieving xml document.
+    setMembersXMLDoc();
+    var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
     for(var i = 0; i< members.length; i++){
         //Selecting the needed information from each member instance.
         var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
@@ -124,13 +184,13 @@ $(document).ready(function (){
     //Storing an updated version of the xml as a string in a cookie.
     $("#registration-form").submit(function() {
         //Creating xml elements needed to construct an instance of a member.
-        var member = xmlDoc.createElement("Member");
-        var name = xmlDoc.createElement("Name");
-        var firstname = xmlDoc.createElement("Firstname");
-        var surname = xmlDoc.createElement("Surname");
-        var dob = xmlDoc.createElement("DOB");
-        var email = xmlDoc.createElement("Email_Address");
-        var subscriber = xmlDoc.createElement("Subscriber");
+        var member = membersXMLDoc.createElement("Member");
+        var name = membersXMLDoc.createElement("Name");
+        var firstname = membersXMLDoc.createElement("Firstname");
+        var surname = membersXMLDoc.createElement("Surname");
+        var dob = membersXMLDoc.createElement("DOB");
+        var email = membersXMLDoc.createElement("Email_Address");
+        var subscriber = membersXMLDoc.createElement("Subscriber");
 
         //Adding values from the registration form into the xml elements.
         firstname.append($('#firstname').val());
@@ -148,13 +208,13 @@ $(document).ready(function (){
         member.appendChild(subscriber);
 
         //Retrieving current xml document and updating it with the new member.
-        xmlDoc.getElementsByTagName("Members")[0].appendChild(member);
+        membersXMLDoc.getElementsByTagName("Members")[0].appendChild(member);
 
         /*
         Saving xml document as a string into a cookie. New lines and returns were removed
         using a regular expression as only the first line of the document was being saved.
         Note: In a future release this should be saving to the server side.
          */
-        document.cookie = new XMLSerializer().serializeToString(xmlDoc).replace(/[\r\n]/g, '');
+        document.cookie = new XMLSerializer().serializeToString(membersXMLDoc).replace(/[\r\n]/g, '');
     });
 });

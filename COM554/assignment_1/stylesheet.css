@@ -100,3 +100,37 @@ table {
 tr:nth-child(odd) {
     background-color: #b8b8b8;
 }
+.episode-img{
+    margin-bottom: 20px;
+    border-style: groove;
+    border-color: #4D4D4D;
+    float:right;
+}
+
+.episode-contents-container{
+    padding: 5px;
+    background-color: white;
+    min-height: 150px;
+    border-style: solid;
+    border-color: white;
+    margin-bottom: 5px;
+}
+.episode-container{
+    padding: 0px;
+    background-color: #c4c4c4;
+    padding: 0px 5px 0px 5px;
+    border-style: solid;
+    border-color: #c4c4c4;
+    margin-bottom: 5px;
+}
+.season-container{
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border-style: solid;
+    border-color: #545454;
+    width:97%;
+    background-color: #545454;
+}
+
+
