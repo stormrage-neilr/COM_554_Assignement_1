@@ -17,19 +17,20 @@ body {
 
 #nav-ul {
     text-align: center;
-    padding: 0px 10px;
+    padding: 10px 0px;
 }
 .nav-li {
     background: #262626;
     display: inline-block;
     width: 19%;
     max-width: 140px;
-    padding: 5px 0px;
+    padding: 10px 0px;
     margin: 0px;
+    font-size: large;
 }
 #dropdown-menu{
     position: absolute;
-    margin: 5px 0px;
+    margin: 10px 0px;
     padding: 0px;
     text-align: center;
     width:100%;
@@ -38,7 +39,7 @@ body {
 #dropdown-menu li{
     background: #262626;
     display: block;
-    padding: 5px;
+    padding: 10px 0px;
     margin: 5px 0px;
     text-align: center;
     width: 100%;
@@ -62,6 +63,21 @@ body {
     border-radius: 5px;
     padding: 1px 10px;
     background-color: white;
+    min-height: 633px;
+}
+#registration-wrapper{
+    min-height: 0px;
+}
+
+.trailer-button{
+    margin: 50px 0 0 0;
+    width:32.5%;
+    height: 50px;
+    font-size: 18px;
+}
+iframe{
+    width:100%;
+    min-height:400px;
 }
 
 h1 {
@@ -92,11 +108,6 @@ input[type=checkbox] {
     max-width: 717px;
     margin: auto;
 }
-.wrapper {
-    border-radius: 5px;
-    padding: 1px 10px;
-    background-color: white;
-}
 #register-content {
     padding: 0px 10px;
     max-width: 380px;
@@ -111,9 +122,6 @@ table {
 }
 tr:nth-child(odd) {
     background-color: #b8b8b8;
-}
-#seasons-wrapper{
-    min-height: 633px;
 }
 .episode-img{
     margin-bottom: 20px;

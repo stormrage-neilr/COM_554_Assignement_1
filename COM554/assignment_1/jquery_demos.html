@@ -45,7 +45,23 @@ Home Content:
 -->
 <section id="home-content" class="content">
     <div class="wrapper">
-        <p>this is a Home paragraph</p>
+        <h1>Home</h1>
+        <p>
+            Welcome to the walking dead (unofficial) fan club site. Feel free to browse
+            around. Cant get enough of The Walking Dead? why not register to receive information
+            about upcoming events and news. Haven't seen the walking dead? Don't worry, just
+            play a trailer below:
+        </p>
+        <div>
+            <button class="trailer-button" id="trailer-button1">Trailer 1</button>
+            <button class="trailer-button" id="trailer-button2">Trailer 2</button>
+            <button class="trailer-button" id="trailer-button3">Trailer 3</button>
+            <div>
+                <iframe class="trailer  active" id="trailer1" src="https://www.youtube.com/embed/R1v0uFms68U" allowfullscreen></iframe>
+                <iframe class="trailer" id="trailer2" src="https://www.youtube.com/embed/GJRNHAJAcYg" allowfullscreen></iframe>
+                <iframe class="trailer" id="trailer3" src="https://www.youtube.com/embed/sfAc2U20uyg" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -54,7 +70,8 @@ Seasons Content:
 -->
 <section id="seasons-content" class="content">
     <div id="seasons-wrapper" class="wrapper">
-        <div class="seasons-container">
+        <h1>Seasons</h1>
+        <div id="seasons-container">
         </div>
     </div>
 </section>
@@ -92,7 +109,7 @@ Registration Content:
 This form shows use of html5 functionality.
 -->
 <section id="register-content" class="content">
-    <div class="wrapper">
+    <div id="registration-wrapper" class="wrapper">
         <h1>Register</h1>
         <form id="registration-form">
             <label class="bold">Firstname:</label><input id='firstname' type="text" required/><br>
