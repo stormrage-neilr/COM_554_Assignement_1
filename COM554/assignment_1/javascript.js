@@ -87,13 +87,20 @@ $(document).ready(function (){
     $("#dropdown-menu").find('li').click(function(e){
         e.stopPropagation();
         var seasonNumber = $(this)[0].innerText.substring(7, 8);
-        $("section").hide();
-        $("#seasons-content").show();
-        $("#season-container" + seasonNumber).find('.episodes-container').slideDown();
-        $("#dropdown-menu").slideUp();
-        $('html, body').animate({
-            scrollTop: ($('#season-container' + seasonNumber).offset().top)
-        },'fast');
+        $("#dropdown-menu").slideUp(function(){
+            $("section").hide();
+            $("#seasons-content").show();
+            $("#seasons-content").addClass('content');
+            $(".season-container").hide().fadeIn('slow', function(){
+                $("#season-container" + seasonNumber).find('.episodes-container').slideDown(function(){
+                    $("#dropdown-menu").slideUp(function(){
+                        $('html, body').animate({
+                            scrollTop: ($('#season-container' + seasonNumber).offset().top)
+                        },'fast');
+                    });
+                });
+            });
+        });
     });
 
     // *** Home Page Functionality ***
