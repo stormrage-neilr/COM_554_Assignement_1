@@ -124,13 +124,14 @@ $(document).ready(function (){
         var htmlString = "<div class=\"season-container\" id=\"season-container" + seasonNo +"\"><h2>Season " + seasonNo + "</h2><div class=\"episodes-container\">";
         var episodes = seasons[i].getElementsByTagName("Episode");
         for (var j = 0; j < episodes.length; j++) {
-            var description = episodes[j].getElementsByTagName("Description")[0].innerHTML;
+            var k = episodes.length -1 - j;
+            var description = episodes[k].getElementsByTagName("Description")[0].innerHTML;
             if (description === ""){
                 description = "No content description available... I'm Sorry";
             }
             htmlString += "<div class=\"episode-container\"><h3>Episode " + (j + 1) + "</h3><div class=\"episode-contents-container\">" +
-            "<h4>" + episodes[j].getElementsByTagName("Title")[0].innerHTML + "</h4>" +
-            "<img class=\"episode-img\" src=\"" + episodes[j].getElementsByTagName("Image_Source")[0].innerHTML  + "\"/>" +
+            "<h4>" + episodes[k].getElementsByTagName("Title")[0].innerHTML + "</h4>" +
+            "<img class=\"episode-img\" src=\"" + episodes[k].getElementsByTagName("Image_Source")[0].innerHTML  + "\"/>" +
             "<div class=\"description-container\"><p>" + description  + "</p></div></div></div>";
         }
         htmlString += "</div></div>";
