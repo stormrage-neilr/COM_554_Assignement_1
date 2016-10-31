@@ -47,11 +47,13 @@ $(document).ready(function (){
     $("#seasons-button").click(function () {
         $(".nav-li").removeClass("selected");
         $(this).addClass("selected");
-        $("section").hide();
-        $("#seasons-content").show();
-        $("#seasons-content").addClass('content');
-        //Demonstrating fade capabilities below
-        $(".season-container").hide().fadeIn('slow');
+        if(!$('#seasons-content').is(":visible")) {
+            $("section").hide();
+            $("#seasons-content").show();
+            $("#seasons-content").addClass('content');
+            //Demonstrating fade capabilities below
+            $(".season-container").hide().fadeIn('slow');
+        }
     });
     $("#game-button").click(function () {
         $(".nav-li").removeClass("selected");
@@ -88,18 +90,28 @@ $(document).ready(function (){
         e.stopPropagation();
         var seasonNumber = $(this)[0].innerText.substring(7, 8);
         $("#dropdown-menu").slideUp(function(){
-            $("section").hide();
-            $("#seasons-content").show();
-            $("#seasons-content").addClass('content');
-            $(".season-container").hide().fadeIn('slow', function(){
-                $("#season-container" + seasonNumber).find('.episodes-container').slideDown(function(){
-                    $("#dropdown-menu").slideUp(function(){
-                        $('html, body').animate({
-                            scrollTop: ($('#season-container' + seasonNumber).offset().top)
-                        },'fast');
+            if(!$('#seasons-content').is(":visible")) {
+                $("section").hide();
+                $("#seasons-content").show();
+                $("#seasons-content").addClass('content');
+                $(".season-container").hide().fadeIn('slow', function () {
+                    $("#season-container" + seasonNumber).find('.episodes-container').slideDown(function () {
+                        $("#dropdown-menu").slideUp(function () {
+                            $('html, body').animate({
+                                scrollTop: ($('#season-container' + seasonNumber).offset().top)
+                            }, 'fast');
+                        });
                     });
                 });
-            });
+            }else{
+                $("#season-container" + seasonNumber).find('.episodes-container').slideDown(function () {
+                    $("#dropdown-menu").slideUp(function () {
+                        $('html, body').animate({
+                            scrollTop: ($('#season-container' + seasonNumber).offset().top)
+                        }, 'fast');
+                    });
+                });
+            }
         });
     });
 
