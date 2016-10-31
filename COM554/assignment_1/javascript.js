@@ -185,7 +185,6 @@ $(document).ready(function (){
         $(this).find('.episodes-container').slideToggle()
 
     });
-
     //Stoping the slide being toggled from within the episode list container.
     $('.episodes-container').click(function(e){
         e.stopPropagation()
@@ -193,8 +192,10 @@ $(document).ready(function (){
 
     //Adding episode content slide toggle click event onto the parent episode container.
     $('.episode-container').click(function(e){
-        $(this).find('.episode-contents-container').slideToggle(200)
+        e.stopPropagation()
+        $(this).find('.episode-contents-container').toggle("slide")
     });
+
 
 
 
