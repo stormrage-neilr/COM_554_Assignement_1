@@ -16,10 +16,12 @@ $(document).ready(function (){
         // Setting the tooltip y coordinate position to be the same as the mouse.
         $("#tooltip").css("top", (e.pageY) + "px")
     });
+
     //Removing the tooltip when the mouse is no longer over the title image.
     $("#title_image").mouseleave(function(e){
         $("#tooltip").remove();
     });
+
     //Repositioning the tooltip relative to the mouse when the mouse moves.
     $('body').mousemove(function(e){
         var totalWidth = $(this).width();
@@ -41,6 +43,7 @@ $(document).ready(function (){
     $("#home-content").show();
 
     //Navigation button events - These buttons hide and show the main content on the page.
+
     //Home button
     $("#home-button").click(function () {
         //Highlighting correct navigation bar button on click.
@@ -52,6 +55,7 @@ $(document).ready(function (){
         //Adding css to the section
         $("#home-content").addClass('content');
     });
+
     //Seasons button
     $("#seasons-button").click(function () {
         $(".nav-li").removeClass("selected");
@@ -64,6 +68,7 @@ $(document).ready(function (){
             $(".season-container").hide().fadeIn('slow');
         }
     });
+
     //Game button
     $("#game-button").click(function () {
         $(".nav-li").removeClass("selected");
@@ -72,6 +77,7 @@ $(document).ready(function (){
         $("#game-content").show();
         $("#game-content").addClass('content');
     });
+
     //Members button
     $("#members-button").click(function () {
         $(".nav-li").removeClass("selected");
@@ -86,6 +92,7 @@ $(document).ready(function (){
         populateTable();
         populateList();
     });
+
     //Register button
     $("#register-button").click(function () {
         $(".nav-li").removeClass("selected");
@@ -95,17 +102,20 @@ $(document).ready(function (){
     });
 
     //Seasons DropDown Functionality
+
     //Toggling the sub menu to slide down when the mouse hovers over the parent season button.
     $("#seasons-button").hover(function(){
         $("#dropdown-menu").slideDown();
     }, function() {
         $("#dropdown-menu").slideUp();
     });
+
     //Toggling the sub menu to slide up when the mouse hovers away from the parent season button.
     $("#dropdown-menu").hover(function(e){
         e.stopPropagation()
     }, function(e) {
     });
+
     //Adding a click event to the dropdown item to carry out several sequential animations.
     $("#dropdown-menu").find('li').click(function(e){
         e.stopPropagation();// Preventing parent Seasons button functionality.
@@ -149,6 +159,7 @@ $(document).ready(function (){
     //Hiding two tabs initially.
     $('#trailer2').hide();
     $('#trailer3').hide();
+
     //Adding functionality to trailer buttons to switch between video tabs.
     $('#trailer-button1').click(function(){
         //If this is not the active trailer toggle it.
@@ -160,6 +171,7 @@ $(document).ready(function (){
             });
         }
     });
+
     $('#trailer-button2').click(function(){
         if (!$('#trailer2').hasClass("active")) {
             $('.trailer.active').toggle('slow', function(){
@@ -169,6 +181,7 @@ $(document).ready(function (){
             });
         }
     });
+
     $('#trailer-button3').click(function(){
         if (!$('#trailer3').hasClass("active")) {
             $('.trailer.active').toggle('slow', function(){
@@ -178,7 +191,6 @@ $(document).ready(function (){
             });
         }
     });
-
 
     /*
         *** Seasons Functionality ***
@@ -205,12 +217,14 @@ $(document).ready(function (){
             if (description === ""){
                 description = "No content description available... I'm Sorry";
             }
+            //Adding a new episode-container containing the episode information of this current iteration.
             htmlString += "<div class=\"episode-container\"><h3>Episode " + (j + 1) +
                 "</h3><div class=\"episode-contents-container\">" +
             "<h4>" + episodes[k].getElementsByTagName("Title")[0].innerHTML + "</h4>" +
             "<img class=\"episode-img\" src=\"" + episodes[k].getElementsByTagName("Image_Source")[0].innerHTML  + "\"/>" +
             "<div class=\"description-container\"><p>" + description  + "</p></div></div></div>";
         }
+        //Closing HTML amendment string and inserting it into the seasons-container.
         htmlString += "</div></div>";
         $('#seasons-container').prepend(htmlString);
     }
@@ -224,6 +238,7 @@ $(document).ready(function (){
         $(this).find('.episodes-container').slideToggle()
 
     });
+
     //Stoping the slide being toggled from within the episode list container.
     $('.episodes-container').click(function(e){
         e.stopPropagation()
@@ -237,100 +252,118 @@ $(document).ready(function (){
 
     // *** Game Functionality ***
 
-    //Creating game
-    function startGame() {
-        $("#game-screen").remove();
-        $("#game-container").append("<canvas id='game-screen'></canvas>");
-        $("#game-screen").css("height", $("#game-screen").width()*.75 + "px");
-        var context = $("#game-screen")[0].getContext("2d");
+    //Defining a character. The player and enemies will both be characters.
+    function character(src, x, y, z){
+        this.size = 150 / 4;// relative to the canvas size.
+        this.x = x;// characters x location.
+        this.y = y;// characters y location.
+        this.z = z;// characters direction.
 
-        function character(src, x, y, z){
-            this.size = 150 / 4;
-            this.src = src;
-            this.x = x;
-            this.y = y;
-            this.z = z;
-            this.image = new Image();
-            this.image.src = src;
-            this.update = function(){
-                switch (this.z){
-                    case 0:
-                        if (this.y > 0)this.y-=4;
-                        break;
-                    case 1:
-                        this.x+=4;
-                        break;
-                    case 2:
-                        if (this.y < $("#game-screen")[0].height - this.size)this.y+=4;
-                        break;
-                    case 3:
-                        this.x-=4;
-                        break;
-                    default:
-                        break;
-                }
-            };
-            this.hasCollided = function(character){
-                var x = this.x;
-                var y = this.y;
-                var xx = character.x;
-                var yy = character.y;
-                if (this.x > character.x - this.size && this.x < character.x + character.size &&
-                    this.y > character.y - this.size && this.y < character.y + character.size){
-                    var a = this.x > character.x - this.size;
-                    var b = this.x < character.x + character.size;
-                    var c = this.y > character.y - this.size;
-                    var d = this.y < character.y + character.size;
-                    return true;
-                }
-                return false;
+        //Creating an image from the provided source.
+        this.image = new Image();
+        this.image.src = src;
+
+        //The update method adjusts the characters x and y locations depending on its direction.
+        this.update = function(){
+            switch (this.z){
+                case 0: // up
+                    if (this.y > 0)this.y-=4;//this prevents the players character leaving the screen.
+                    break;
+                case 1: // left
+                    this.x+=4;
+                    break;
+                case 2: // down
+                    //this prevents the players character leaving the screen.
+                    if (this.y < $("#game-screen")[0].height - this.size)this.y+=4;
+                    break;
+                case 3: // right
+                    this.x-=4;
+                    break;
+                default:
+                    break;
             }
+        };
+
+        //Basic collision detection
+        this.hasCollided = function(character){
+            //Checking if image area of characters overlap.
+            if (this.x > character.x - this.size && this.x < character.x + character.size &&
+                this.y > character.y - this.size && this.y < character.y + character.size){
+                return true;
+            }
+            return false;
         }
+    }
+
+    //Creating and running game instance.
+    function startGame() {
+        $("#game-screen").remove();//Removing current game instance if there is one.
+        $("#game-container").append("<canvas id='game-screen'></canvas>");//Creating new Game canvas.
+        $("#game-screen").css("height", $("#game-screen").width()*.75 + "px");//Setting canvas height relative to width.
+        var context = $("#game-screen")[0].getContext("2d");//Retrieving context to draw onto the canvas.
+
+        //Creating in game variables
         var player = new character("res/dave-character-8bit.png", 0, 150/8*3, 4);
         var enemies = [];
         var enemyCount = 0;
         var enemySpeed = 50;
+
+        //Adding key listener to alter the players direction.
         $(document).keypress(function(e) {
             switch(e.which){
-                case 119:
-                    player.z = 0;
+                case 119: // key: w
+                    player.z = 0; // up
                     break;
-                case 115:
-                    player.z = 2;
+                case 115: // key: s
+                    player.z = 2; // down
                     break;
             }
         });
+
+        //Updating the game. triggered every 100 milliseconds. (Game Loop)
         var tick = setInterval(function () {
-            if (enemyCount < 1){
+            if (enemyCount < 1){//Adding enemy when enemy count is 0
+                //Generating random height for the enemy.
                 var randomHeight = Math.floor(Math.random() * ($('#game-screen')[0].height - player.size));
-                enemies.push(new character("res/8_bit_zombie_by_melolzugaming-d50kbqk.png", Math.floor($('#game-screen')[0].width), randomHeight, 3));
-                enemyCount = enemySpeed;
-                enemySpeed--;
+                //Creating new enemy and adding it to the array.
+                enemies.push(new character("res/8_bit_zombie_by_melolzugaming-d50kbqk.png",
+                    Math.floor($('#game-screen')[0].width), randomHeight, 3));
+                enemyCount = enemySpeed;//resetting count.
+                enemySpeed-=2;//reducing next increment.
             }
-            enemyCount--;
+            enemyCount--;//counting down.
+
+            //Updating character location relative to their directions.
             player.update();
             for (var i = 0; i < enemies.length; i++){
                 enemies[i].update();
             }
-            context.clearRect(0, 0, $("#game-screen")[0].width, $("#game-screen")[0].height);
-            context.drawImage(player.image, player.x, player.y, player.size, player.size);
-            for (var i = 0; i < enemies.length; i++){
+
+            //Refreshing the screen to illustrate the new character positions.
+            context.clearRect(0, 0, $("#game-screen")[0].width, $("#game-screen")[0].height);// clearing screen
+            context.drawImage(player.image, player.x, player.y, player.size, player.size);// drawing player
+            for (var i = 0; i < enemies.length; i++){ // drawing enemies
                 context.drawImage(enemies[i].image, enemies[i].x, enemies[i].y, enemies[i].size, enemies[i].size);
             }
+
+            //Ending the game if a collision happens.
             for (var i = 0; i < enemies.length; i++) {
-                if (enemies[i].hasCollided(player)){
+                if (enemies[i].hasCollided(player)){ //If a collision has happened end the game.
+                    //displaying game over message.
                     context.fillText("Game Over", $("#game-screen")[0].width / 2.5, $("#game-screen")[0].height / 3);
-                    clearInterval(tick);
+                    clearInterval(tick); //Exiting the game loop.
                     return true;
                 }
             }
         }, 100);
     }
 
+    //Adding functionality to trigger the starting of the game.
     $("#start-game-button").click(function() {
         startGame();
     });
 
+    //Adjusting the Canvas height relative to the width on screen resize.
     $(window).resize(function() {
         $("#game-screen").css("height", $("#game-screen").width()*.75 + "px");
     });
@@ -365,6 +398,8 @@ $(document).ready(function (){
         var birthYear = dob.substring(0, 4);
 
         var age = thisYear - birthYear;
+
+        //Reducing age by one if the birthday hasn't occurred yet this year.
         if ((birthMonth > thisMonth) || (birthMonth == thisMonth && birthDay > today)) {
             age -= 1;
         }
@@ -380,9 +415,13 @@ $(document).ready(function (){
 
     //Populating the members table.
     function populateTable() {
-        var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
+        var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving member nodes from the xml document.
+
+        //Creating the table and its headers
         var html = "<table id='table'><tr id=\"member-table-header-row\"><th>Name</th><th>Age</th><th>Email</th>" +
         "<th>On Mailing List</th></tr>";
+
+        //Iterating thought the members and adding each members details into the table as a new row.
         for (var i = 0; i < members.length; i++) {
             //Selecting the needed information from each member instance.
             var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
@@ -391,9 +430,9 @@ $(document).ready(function (){
             var email = members[i].getElementsByTagName("Email_Address")[0].childNodes[0].nodeValue;
             var isSub = members[i].getElementsByTagName("Subscriber")[0].childNodes[0].nodeValue;
 
-            var name = firstname + " " + surname;
+            var name = firstname + " " + surname;//Concatenating full name.
             var age = getAge(dob);//Calculating members age.
-            var subText;
+            var subText;// getting subscribing status.
             if (isSub === "true") {
                 subText = "Yes";
             } else {
@@ -404,6 +443,8 @@ $(document).ready(function (){
             html +="<tr value=" + i + " class='member-row'><td>" + name + "</td><td>" + age + "</td>" +
                 "<td>" + email + "</td><td>" + subText + "</td></tr>";
         }
+
+        //Closing the table and inserting it into the table-container.
         html += "</table>";
         $('#table-container').append(html);
     }
@@ -411,15 +452,18 @@ $(document).ready(function (){
     //Populating the delete button list.
     function populateList(){
         var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
-        var html = "<ul id='delete-button-list'>";
+        var html = "<ul id='delete-button-list'>";// Creating the unordered list.
+        //Iterating through the members and adding a li element for each of them.
         for (var i = 0; i < members.length; i++) {
             //Selecting the needed information from each member instance.
             var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
             //Inserting delete button list item into the list with the firstname of the member.
             html +="<li class='delete-button' value=" + i + ">Delete: " + firstname + "</li>";
         }
+        //Closing unordered list and adding it into the list-container.
         html += "</ul>";
         $('#list-container').append(html);
+
         /*  Adding functionality to the delete list items to delete the selected member from the xml
             file and reload the list, table and select element.
          */
@@ -441,22 +485,29 @@ $(document).ready(function (){
     //Populating the select element.
     function populateSelectElement(){
         var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
+        //Creating the parent select and optgroup element.
         var html = "<select id='select-member'><optgroup label='Members'>" +
-            "<option class='delete-button' value=-1>None</option>";
+            "<option class='delete-button' value=-1>None</option>";// value is used to select the correct table row.
+
+        //Iterating through the members and adding an option element for each.
         for (var i = 0; i < members.length; i++) {
             //Selecting the needed information from each member instance.
             var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
-            //Inserting delete button list item into the list with the firstname of the member.
+            //Inserting option into the select element with the firstname of the member.
             html +="<option class='delete-button' value=" + i + ">" + firstname + "</option>";
         }
+
+        //Closing the optgroup and select elements and inserting them into the select container.
         html += "</optgroup></select>";
         $('#select-container').append(html);
+
         //Adding functionality to the select element to highlight the selected member in the table
         $("#select-member").bind('change', function(){
-            var option = $(".delete-button:selected")[0].value;
+            var option = $(".delete-button:selected")[0].value;//getting the option value that relates to the table row.
             $(".member-row").removeClass("highlight");
-            if ("-1" !== option) {
+            if ("-1" !== option) {//If an option that is not the 'none' option is selected.
                 for (var i = 0; i < $(".member-row").length; i++) {
+                    // If the option value matches the table row highlight the row.
                     if (option === $(".member-row").get(i).getAttribute("value")) {
                         $(".member-row").get(i).setAttribute('class', 'member-row highlight');
                     }
@@ -478,7 +529,7 @@ $(document).ready(function (){
         if(mm < 10){//prefixing months less than 10 with 0.
             mm = '0' + mm
         }
-        return today.getFullYear()+'-'+mm+'-'+dd;
+        return today.getFullYear()+'-'+mm+'-'+dd//Todays date in correct format.
     });
 
     //Storing an updated version of the xml as a string in a cookie.
