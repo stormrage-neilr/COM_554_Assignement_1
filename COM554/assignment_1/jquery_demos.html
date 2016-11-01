@@ -37,7 +37,6 @@ has jQuery addClass() and removeClass() triggering on a click event.
         <li class="nav-li" id='members-button'><label class="nav-label">Members</label></li>
         <li class="nav-li" id='register-button'><label class="nav-label">Register</label></li>
     </ul>
-
 </nav>
 
 <!--
@@ -81,7 +80,10 @@ Game Content:
 -->
 <section id="game-content" class="content">
     <div class="wrapper">
-        <p>this is a Game paragraph</p>
+        <h1>Game</h1>
+        <p>Use the 'w' and 's' butttons on your keyboard to move up and down and try to avoid the zombies!</p>
+        <button id='start-game-button'>Start Game</button>
+        <div id="game-container"></div>
     </div>
 </section>
 
@@ -99,7 +101,7 @@ Members Content:
             <div id="table-container" class="members-container"><h3>Members Table:</h3></div>
             <div id="list-container" class="members-container"><h3>Delete Members List:</h3></div>
             <div id="selected-member-info-container" class="members-container"></div>
-        </article>
+        </div>
     </div>
 </section>
 
@@ -115,7 +117,7 @@ This form shows use of html5 functionality.
             <label class="bold">Surname:</label><input id='surname' type="text" required/><br>
             <label class="bold">Email:</label><input id='email' type="email" placeholder="Enter a valid email address" required/><br>
             <label class="bold">Date Of Birth:</label><input id='dob-input' type="date" required/><br>
-            <label for="subscribe-checkbox">Please tick the checkbox to recieve information about upcoming events and the latest walking dead news.</label>
+            <label for="subscribe-checkbox">Please tick the checkbox to receive information about upcoming events and the latest walking dead news.</label>
             <input id="subscribe-checkbox" type="checkbox"/>
             <input type="submit" id="submit-button">
         </form>

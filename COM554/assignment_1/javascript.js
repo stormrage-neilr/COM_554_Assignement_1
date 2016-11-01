@@ -4,7 +4,7 @@ $(document).ready(function (){
 
     //Adding a tooltip to display assignment details when the mouse hovers over the title image.
     $("#title_image").mouseover(function(e){
-        $("body").append("<p id='tooltip'>Neil Rafferty (B00451753) - COM554: Assignment 1</p>");
+        $("body").append("<p id='tooltip'>Neil Rafferty (B00451753) - COM554: Assignment 1 (2016)</p>");
         var totalWidth = $(this).width();
         if(e.pageX/totalWidth > .5){
             $("#tooltip").css("left", (e.pageX - 370) + "px");
@@ -25,6 +25,7 @@ $(document).ready(function (){
         }
         $("#tooltip").css("top", (e.pageY) + "px")
     });
+
 
     // *** Navigation bar section Functionality ***
 
@@ -120,6 +121,7 @@ $(document).ready(function (){
         });
     });
 
+
     // *** Home Page Functionality ***
 
     //Adding tab functionality to trailer buttons to switch between videos
@@ -152,6 +154,7 @@ $(document).ready(function (){
             });
         }
     });
+
 
     // *** Seasons Functionality ***
 
@@ -203,6 +206,112 @@ $(document).ready(function (){
         $(this).find('.episode-contents-container').toggle("slide")
     });
 
+
+
+    // *** Game Functionality ***
+
+    //Creating game
+    function startGame() {
+        $("#game-screen").remove();
+        $("#game-container").append("<canvas id='game-screen'></canvas>");
+        $("#game-screen").css("height", $("#game-screen").width()*.75 + "px");
+        var context = $("#game-screen")[0].getContext("2d");
+
+        function character(src, x, y, z){
+            this.size = 150 / 4;
+            this.src = src;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+            this.image = new Image();
+            this.image.src = src;
+            this.update = function(){
+                switch (this.z){
+                    case 0:
+                        if (this.y > 0)this.y-=4;
+                        break;
+                    case 1:
+                        this.x+=4;
+                        break;
+                    case 2:
+                        if (this.y < $("#game-screen")[0].height - this.size)this.y+=4;
+                        break;
+                    case 3:
+                        this.x-=4;
+                        break;
+                    default:
+                        break;
+                }
+            };
+            this.hasCollided = function(character){
+                var x = this.x;
+                var y = this.y;
+                var xx = character.x;
+                var yy = character.y;
+                if (this.x > character.x - this.size && this.x < character.x + character.size &&
+                    this.y > character.y - this.size && this.y < character.y + character.size){
+                    var a = this.x > character.x - this.size;
+                    var b = this.x < character.x + character.size;
+                    var c = this.y > character.y - this.size;
+                    var d = this.y < character.y + character.size;
+                    return true;
+                }
+                return false;
+            }
+        }
+        var player = new character("res/dave-character-8bit.png", 0, 150/8*3, 4);
+        var enemies = [];
+        var enemyCount = 0;
+        var enemySpeed = 50;
+        $(document).keypress(function(e) {
+            switch(e.which){
+                case 119:
+                    player.z = 0;
+                    break;
+                case 115:
+                    player.z = 2;
+                    break;
+            }
+        });
+        var tick = setInterval(function () {
+            if (enemyCount < 1){
+                var randomHeight = Math.floor(Math.random() * ($('#game-screen')[0].height - player.size));
+                enemies.push(new character("res/8_bit_zombie_by_melolzugaming-d50kbqk.png", Math.floor($('#game-screen')[0].width), randomHeight, 3));
+                enemyCount = enemySpeed;
+                enemySpeed--;
+            }
+            enemyCount--;
+            player.update();
+            for (var i = 0; i < enemies.length; i++){
+                enemies[i].update();
+            }
+            context.clearRect(0, 0, $("#game-screen")[0].width, $("#game-screen")[0].height);
+            context.drawImage(player.image, player.x, player.y, player.size, player.size);
+            for (var i = 0; i < enemies.length; i++){
+                context.drawImage(enemies[i].image, enemies[i].x, enemies[i].y, enemies[i].size, enemies[i].size);
+            }
+            for (var i = 0; i < enemies.length; i++) {
+                if (enemies[i].hasCollided(player)){
+                    context.fillText("Game Over", $("#game-screen")[0].width / 2.5, $("#game-screen")[0].height / 3);
+                    clearInterval(tick);
+                    return true;
+                }
+            }
+        }, 100);
+    }
+
+    $("#start-game-button").click(function() {
+        startGame();
+    });
+
+    $(window).resize(function() {
+        $("#game-screen").css("height", $("#game-screen").width()*.75 + "px");
+    });
+
+
+
+
+
     /* *** Members Functionality ***
 
     An initial list of members is being loaded from an xml file in the project.
@@ -250,7 +359,7 @@ $(document).ready(function (){
     function populateTable() {
         var members = membersXMLDoc.getElementsByTagName("Member");//Retrieving xml document.
         var html = "<table id='table'><tr id=\"member-table-header-row\"><th>Name</th><th>Age</th><th>Email</th>" +
-        "<th>On Mailing List</th></tr>"
+        "<th>On Mailing List</th></tr>";
         for (var i = 0; i < members.length; i++) {
             //Selecting the needed information from each member instance.
             var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
@@ -269,10 +378,10 @@ $(document).ready(function (){
             }
 
             //Inserting table row element directly into the dom with current information.
-            html +="<tr><td>" + name + "</td><td>" + age + "</td>" +
+            html +="<tr value=" + i + " class='member-row'><td>" + name + "</td><td>" + age + "</td>" +
                 "<td>" + email + "</td><td>" + subText + "</td></tr>";
         }
-        html += "</table>"
+        html += "</table>";
         $('#table-container').append(html);
     }
 
@@ -284,10 +393,26 @@ $(document).ready(function (){
             //Selecting the needed information from each member instance.
             var firstname = members[i].getElementsByTagName("Firstname")[0].childNodes[0].nodeValue;
             //Inserting delete button list item into the list with the firstname of the member.
-            html +="<li class='delete-button'>Delete: " + firstname + "</li>";
+            html +="<li class='delete-button' value=" + i + ">Delete: " + firstname + "</li>";
         }
-        html += "</ul>"
+        html += "</ul>";
         $('#list-container').append(html);
+        /*  Adding functionality to the delete list items to delete the selected member from the xml
+            file and reload the list, table and select element.
+         */
+        $(".delete-button").click(function(){
+            membersXMLDoc.getElementsByTagName("Member")[$(this).val()].remove();
+            /*
+             Saving xml document as a string into a cookie. New lines and returns were removed
+             using a regular expression as only the first line of the document was being saved.
+             Note: In a future release this should be saving to the server side.
+             */
+            document.cookie = new XMLSerializer().serializeToString(membersXMLDoc).replace(/[\r\n]/g, '');
+            removeCurrentContent();
+            populateSelectElement();
+            populateTable();
+            populateList();
+        });
     }
 
     //Populating the select element.
@@ -301,8 +426,20 @@ $(document).ready(function (){
             //Inserting delete button list item into the list with the firstname of the member.
             html +="<option class='delete-button' value=" + i + ">" + firstname + "</option>";
         }
-        html += "</optgroup></select>"
+        html += "</optgroup></select>";
         $('#select-container').append(html);
+        //Adding functionality to the select element to highlight the selected member in the table
+        $("#select-member").bind('change', function(){
+            var option = $(".delete-button:selected")[0].value;
+            $(".member-row").removeClass("highlight");
+            if ("-1" !== option) {
+                for (var i = 0; i < $(".member-row").length; i++) {
+                    if (option === $(".member-row").get(i).getAttribute("value")) {
+                        $(".member-row").get(i).setAttribute('class', 'member-row highlight');
+                    }
+                }
+            }
+        });
     }
 
     // *** Registration section Functionality ***
