@@ -11,14 +11,18 @@
 
 <!--
 Title Image Element:
-Set in stylesheet.css to scale when the browser size gets below the image size.
+The image scales when the browser size gets below the image size. A tooltip will show when triggered by on a mouse hover
+event. The tooltip follows the mouse. It switches from the right to left of the mouse to stay more centered in the
+screen
 -->
 <img id='title_image' src="res/title_image.png">
 
 <!--
 Navigation Bar:
-Set in stylesheet.css to scale when the browser size gets below the maximum size, also
-has jQuery addClass() and removeClass() triggering on a click event.
+Set to scale when the browser size gets below the maximum size. Uses jQuery addClass() and removeClass() triggering by a
+click event to highlight selected items. Hide() and show() methods are used to hide and show contents. A hover event is
+used to toggle a slide event on the dropdown menu when they are clicked a series of animations will guide the user to
+the desired content.
 -->
 <nav id="navBar">
     <ul id="nav-ul">
@@ -41,6 +45,7 @@ has jQuery addClass() and removeClass() triggering on a click event.
 
 <!--
 Home Content:
+Hosts a set of tabs that display video links of TWD (The Walking Dead) trailers
 -->
 <section id="home-content" class="content">
     <div class="wrapper">
@@ -66,6 +71,29 @@ Home Content:
 
 <!--
 Seasons Content:
+The seasons content was pulled from http://www.tv.com/shows/the-walking-dead/episodes/ and concatenates it into a xml
+string that was then saved locally as seasons.xml. The code used is as follows:
+
+xml = '';
+var iteration = 0;
+seasons = $('.season');
+seasons.each(function(){
+	xml += '<Season><Season_Number>'+(7-iteration)+'</Season_Number>';
+	var episodesTitles = seasons.get(iteration).getElementsByClassName('title');
+	var episodesImg = seasons.get(iteration).getElementsByClassName('thumb');
+	var episodesDesc = seasons.get(iteration).getElementsByClassName('description');
+	for(var i = 0; i < episodesTitles.length; i++){
+		xml += '<Title>'+episodesTitles[i].innerHTML+'</Title';
+		xml += '<Image_Source>'+episodesImg[i].src+'</Image_Source>';
+		xml += '<Description>'+episodesDesc[i].innerText+'</Description>';
+	}
+	xml += '</Season>';
+	iteration++;
+});
+
+Note: DTD has been used to structure the xml file
+This information was the used to dynamically populate an accordion for each season which in turn contained an accordion
+for each episode.
 -->
 <section id="seasons-content" class="content">
     <div id="seasons-wrapper" class="wrapper">
@@ -77,6 +105,9 @@ Seasons Content:
 
 <!--
 Game Content:
+A simple game was created by drawing images to a container using the setInterval() method to update positions. The game
+makes use of a keylistener (on the 'w' and 's' key) to move the character and basic collision detection to end the game.
+Note: The rate in which zombies are released speeds up.
 -->
 <section id="game-content" class="content">
     <div class="wrapper">
@@ -89,6 +120,10 @@ Game Content:
 
 <!--
 Members Content:
+This section demonstrates the dynamic creation and population of a select, table and list element. These elements are all created using
+either the members.xml file or an updated version on the xml stored as a cookie. The selected option triggers the
+associated table row to be highlighted. The list has been given delete functionality that removes the member from the cookie
+xml data then reloads the dynamic elements to reflect the database changes.
 -->
 <section id="members-content" class="content">
     <div class="wrapper">
@@ -107,7 +142,9 @@ Members Content:
 
 <!--
 Registration Content:
-This form shows use of html5 functionality.
+The contents of this form are used to add members into the database and therefore update the members table, list and
+select element. HTML5 functionality such as the date type and the requires feature have been used here and some
+javascript sets the max date to today.
 -->
 <section id="register-content" class="content">
     <div id="registration-wrapper" class="wrapper">
