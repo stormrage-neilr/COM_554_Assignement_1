@@ -1,0 +1,30 @@
+/* The Seasons Section:
+   This is CSS specific to the seasons section. Each container has a slightly different background colour.
+*/
+.season-container{
+    cursor: pointer; /* changing pointer to demonstrate functionality. */
+    margin-bottom: 5px;
+    margin-top: 15px;
+    border: solid #545454;
+    width:97%;
+    background-color: #545454;
+}
+.episode-container{
+    padding: 0px;
+    background-color: #c4c4c4;
+    padding: 0px 5px 0px 5px;
+    border: solid #c4c4c4;
+    margin-bottom: 5px;
+}
+.episode-contents-container{
+    padding: 5px;
+    background-color: white;
+    min-height: 150px;
+    border: solid white;
+    margin-bottom: 5px;
+}
+.episode-img{
+    margin-bottom: 20px;
+    border: solid #bdbdbd;
+    float:right; /* setting image to the right of the text. */
+}

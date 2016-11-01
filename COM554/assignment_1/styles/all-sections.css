@@ -1,0 +1,32 @@
+/* CSS Relative to all Sections:
+   The content and wrapper set up basic CSS for a container to each sections content.
+*/
+body {
+    background: #0D0D0D;
+    font-family: Arial;
+    margin: 0;
+}
+.content {
+    padding: 0px 10px;
+    width: 95%;
+    max-width: 717px;
+    margin: auto;
+}
+.wrapper {
+    border-radius: 5px;
+    padding: 1px 10px;
+    background-color: white;
+    min-height: 633px;
+}
+h1 {
+    font-size: 24px;
+    text-align-last: center;
+    text-decoration: underline;
+}
+.trailer-button, #start-game-button{
+    cursor: pointer; /* changing pointer to demonstrate functionality. */
+    margin: 50px 0 0 0;
+    width:32.5%;
+    height: 50px;
+    font-size: 18px;
+}

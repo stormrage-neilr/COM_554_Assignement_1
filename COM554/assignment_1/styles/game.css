@@ -1,0 +1,13 @@
+/* The Game Section:
+   This is CSS specific to the seasons game section. Note: most of the game graphics are done in the javascript file.
+*/
+#game-screen {
+    background-color: #77ff77;
+    border: solid 5px #004b00; /* Setting several boarded properties at once*/
+    width: 97.5%;
+    margin: 4px 4px 4px;
+}
+#start-game-button{
+    width: 97.5%;
+    margin: 4px 4px 20px;
+}

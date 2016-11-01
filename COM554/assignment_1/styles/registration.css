@@ -1,0 +1,26 @@
+/* The Registration Section:
+   This is CSS specific to the Registration section.
+*/
+form input {
+    font-size: 15px;
+    width: 100%;
+    padding: 5px 0px;
+    margin: 5px 0px;
+}
+input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 0px;
+    margin: 5px 0;
+    cursor: pointer; /* changing pointer to demonstrate functionality. */
+}
+input[type=checkbox] {
+    width: 12px;
+    margin: 0px;
+}
+#registration-wrapper{
+    min-height: 0px; /* registrations wrapper is smaller. */
+}
+#register-content {
+    max-width: 380px; /* max width of form is set */
+}

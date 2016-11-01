@@ -1,0 +1,20 @@
+/* Title Image CSS:
+   This image is set to expand to 100% of the screen until it reaches 719px and has a tool tip linked to it.
+*/
+#title_image{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: 100%;
+    max-width: 719px;
+    border: 2px solid;
+}
+#tooltip{
+    position: absolute;
+    background-color: #ffdb8c;
+    border: 4px solid #646464;
+    width: 370px;
+    padding: 2px;
+    float:left;
+}

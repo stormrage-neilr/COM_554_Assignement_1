@@ -1,0 +1,12 @@
+/* The Home Section:
+   This is CSS specific to the home section.
+*/
+iframe{
+    width:100%; /* Scales with container */
+    min-height:400px;
+}
+#register-content {
+    padding: 0px 10px;
+    max-width: 380px;
+    margin: auto;
+}

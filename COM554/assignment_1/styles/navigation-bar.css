@@ -1,0 +1,45 @@
+/* The Menu Bar:
+   Like the title image it has been set to adjust to the screen size.
+*/
+#nav-ul {
+    text-align: center;
+    padding: 10px 0px;
+}
+.nav-li {
+    cursor: pointer; /* changing pointer to demonstrate functionality. */
+    background: #262626;
+    display: inline-block;
+    width: 19%;
+    max-width: 140px;
+    padding: 10px 0px;
+    margin: 0px;
+    font-size: large;
+}
+/* display:none is used to hide the dropdown ul and absolute positioning is used so that the menu is unaffected and does
+   not affect any other elements.
+*/
+#dropdown-menu{
+    position: absolute;
+    margin: 10px 0px;
+    padding: 0px;
+    text-align: center;
+    width:100%;
+    display: none;
+}
+#dropdown-menu li{
+    cursor: pointer; /* changing pointer to demonstrate functionality. */
+    background: #262626;
+    display: block;
+    padding: 10px 0px;
+    margin: 5px 0px;
+    text-align: center;
+    width: 100%;
+}
+.nav-li label {
+    cursor: pointer; /* changing pointer to demonstrate functionality. */
+    color: #BFBFBF;
+}
+/* This is set the different background color set to trigger when a menu item is selected or hovered upon. */
+.nav-li.selected, .nav-li:hover, #dropdown-menu li:hover{
+    background: #4D4D4D;
+}
