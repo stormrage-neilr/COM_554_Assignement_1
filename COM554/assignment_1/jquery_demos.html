@@ -47,14 +47,15 @@ the desired content.
         <li class="nav-li" id='home-button'><label class="nav-label">Home</label></li>
         <li class="nav-li" id='seasons-button'><label class="nav-label">Seasons</label>
             <ul id="dropdown-menu">
-            <li class="nav-li" id="dropdown-season1"><label class="nav-label">Season 1</label></li>
-            <li class="nav-li" id="dropdown-season2"><label class="nav-label">Season 2</label></li>
-            <li class="nav-li" id="dropdown-season3"><label class="nav-label">Season 3</label></li>
-            <li class="nav-li" id="dropdown-season4"><label class="nav-label">Season 4</label></li>
-            <li class="nav-li" id="dropdown-season5"><label class="nav-label">Season 5</label></li>
-            <li class="nav-li" id="dropdown-season6"><label class="nav-label">Season 6</label></li>
-            <li class="nav-li" id="dropdown-season7"><label class="nav-label">Season 7</label></li>
-        </ul></li>
+                <li class="nav-li" id="dropdown-season1"><label class="nav-label">Season 1</label></li>
+                <li class="nav-li" id="dropdown-season2"><label class="nav-label">Season 2</label></li>
+                <li class="nav-li" id="dropdown-season3"><label class="nav-label">Season 3</label></li>
+                <li class="nav-li" id="dropdown-season4"><label class="nav-label">Season 4</label></li>
+                <li class="nav-li" id="dropdown-season5"><label class="nav-label">Season 5</label></li>
+                <li class="nav-li" id="dropdown-season6"><label class="nav-label">Season 6</label></li>
+                <li class="nav-li" id="dropdown-season7"><label class="nav-label">Season 7</label></li>
+            </ul>
+        </li>
         <li class="nav-li" id='game-button'><label class="nav-label">Game</label></li>
         <li class="nav-li" id='members-button'><label class="nav-label">Members</label></li>
         <li class="nav-li" id='register-button'><label class="nav-label">Register</label></li>
@@ -102,7 +103,7 @@ seasons.each(function(){
 	var episodesImg = seasons.get(iteration).getElementsByClassName('thumb');
 	var episodesDesc = seasons.get(iteration).getElementsByClassName('description');
 	for(var i = 0; i < episodesTitles.length; i++){
-		xml += '<Title>'+episodesTitles[i].innerHTML+'</Title';
+		xml += '<Title>'+episodesTitles[i].innerHTML+'</Title>';
 		xml += '<Image_Source>'+episodesImg[i].src+'</Image_Source>';
 		xml += '<Description>'+episodesDesc[i].innerText+'</Description>';
 	}
@@ -154,7 +155,6 @@ xml data then reloads the dynamic elements to reflect the database changes.
             </div>
             <div id="table-container" class="members-container"><h3>Members Table:</h3></div>
             <div id="list-container" class="members-container"><h3>Delete Members List:</h3></div>
-            <div id="selected-member-info-container" class="members-container"></div>
         </div>
     </div>
 </section>

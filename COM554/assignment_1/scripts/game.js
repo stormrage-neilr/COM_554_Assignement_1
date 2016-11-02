@@ -37,8 +37,10 @@ $(document).ready(function (){
         //Basic collision detection
         this.hasCollided = function(character){
             //Checking if image area of characters overlap.
-            if (this.x > character.x - this.size && this.x < character.x + character.size &&
-                this.y > character.y - this.size && this.y < character.y + character.size){
+            if (this.x > character.x - this.size &&
+                this.x < character.x + character.size &&
+                this.y > character.y - this.size &&
+                this.y < character.y + character.size){
                 return true;
             }
             return false;

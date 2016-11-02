@@ -17,19 +17,19 @@ $(document).ready(function (){
         populateSelectElement();
         populateTable();
         populateList();
-    }
+    };
 
     //Retrieving an xml document from the users cookie or the xml file.
     setMembersXMLDoc = function() {
         if (document.cookie == "") {
             var xhr = new XMLHttpRequest();
-            xhr.open("GET", "databases/members.xml", false)//synchronous local get request.
+            xhr.open("GET", "databases/members.xml", false);//synchronous local get request.
             xhr.send();
             membersXMLDoc = xhr.responseXML;//returning xhr request as an xml document.
         }else{
             membersXMLDoc = $.parseXML(document.cookie);//returning document cookie string parsed into xml.
         }
-    }
+    };
 
     //This method returns an age given a date.
     function getAge(dob){
