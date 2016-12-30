@@ -20,14 +20,18 @@ $(document).ready(function (){
     };
 
     //Retrieving an xml document from the users cookie or the xml file.
-    setMembersXMLDoc = function() {
-        if (document.cookie == "") {
+    setMembersXMLDoc = function setMembersXMLDoc() {
+        if (document.cookie.indexOf("<Members>") === -1) {
             var xhr = new XMLHttpRequest();
             xhr.open("GET", "databases/members.xml", false);//synchronous local get request.
             xhr.send();
             membersXMLDoc = xhr.responseXML;//returning xhr request as an xml document.
         }else{
-            membersXMLDoc = $.parseXML(document.cookie);//returning document cookie string parsed into xml.
+            var xmlString = document.cookie.split('<Members>')[1].split('</Members>')[0];
+            xmlString = '<Members>' + xmlString + '</Members>';
+            document.cookie += "=;expires=Thu, 05 Oct 1990 00:00:01 GMT;";
+            document.cookie = xmlString;
+            membersXMLDoc = $.parseXML(xmlString);//returning document cookie string parsed into xml.
         }
     };
 
@@ -118,6 +122,7 @@ $(document).ready(function (){
              using a regular expression as only the first line of the document was being saved.
              Note: In a future release this should be saving to the server side.
              */
+            document.cookie += "=;expires=Thu, 05 Oct 1990 00:00:01 GMT;";
             document.cookie = new XMLSerializer().serializeToString(membersXMLDoc).replace(/[\r\n]/g, '');
             removeCurrentContent();
             populateSelectElement();

@@ -50,6 +50,7 @@ $(document).ready(function (){
          using a regular expression as only the first line of the document was being saved.
          Note: In a future release this should be saving to the server side.
          */
+        document.cookie += "=;expires=Thu, 05 Oct 1990 00:00:01 GMT;";
         document.cookie = new XMLSerializer().serializeToString(membersXMLDoc).replace(/[\r\n]/g, '');
     });
 });
